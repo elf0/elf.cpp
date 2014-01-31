@@ -96,13 +96,13 @@ public:
  }
 
  void Reference(){
-  ++_nCount;
-  //fprintf(stderr, "Reference: %lu\n", _nCount);
+  ++_nReferences;
+  //fprintf(stderr, "Reference: %lu\n", _nReferences);
  }
 
  void Dereference(){
-  //fprintf(stderr, "Dereference: %lu\n", _nCount);
-  if(--_nCount == 0)
+  //fprintf(stderr, "Dereference: %lu\n", _nReferences);
+  if(--_nReferences == 0)
    delete this;
  }
 
@@ -110,7 +110,7 @@ private:
  SharedObject(const T &object): T(object){}
  ~SharedObject(){}
 
- size_t _nCount = 1;
+ size_t _nReferences = 1;
 };
 
 }//namespace elf
