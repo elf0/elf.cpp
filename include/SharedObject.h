@@ -12,20 +12,20 @@ template<typename T>
 class SharedObject{
 public:
  SharedObject(){
-  fprintf(stderr, "SharedObject(): %lu\n", _nReferences);
+  //fprintf(stderr, "SharedObject(): %lu\n", _nReferences);
  }
 private:
  ~SharedObject(){
-  fprintf(stderr, "~SharedObject(): %lu\n", _nReferences);
+  //fprintf(stderr, "~SharedObject(): %lu\n", _nReferences);
  }
 
  void Reference(){
   ++_nReferences;
-  fprintf(stderr, "Reference: %lu\n", _nReferences);
+  //fprintf(stderr, "Reference: %lu\n", _nReferences);
  }
 
  void Dereference(){
-  fprintf(stderr, "Dereference: %lu\n", _nReferences);
+  //fprintf(stderr, "Dereference: %lu\n", _nReferences);
   if(--_nReferences == 0){
    get()->~T();
    delete this;
@@ -52,7 +52,7 @@ public:
 
  SharedPointer(const SharedPointer &other)
   : _pObject(other._pObject){
-  fprintf(stderr, "SharedPointer: Copy constructor\n");
+  //fprintf(stderr, "SharedPointer: Copy constructor\n");
   Reference();
  }
 
