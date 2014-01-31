@@ -3,23 +3,25 @@
 //Author: elf
 //EMail: elf198012@gmail.com
 
+namespace elf{
+
 template<typename T>
 class SharedObject;
 
 template<typename T>
-class ObjectUser{
+class SharedPointer{
 public:
- ObjectUser(){};
+ SharedPointer(){};
 
- ObjectUser(const ObjectUser &other)
+ SharedPointer(const SharedPointer &other)
   : _pObject(other._pObject){
   //fprintf(stderr, "Copy constructor\n");
   Reference();
  }
 
- ~ObjectUser(){Dereference();}
+ ~SharedPointer(){Dereference();}
 
- ObjectUser &operator=(const ObjectUser &other){
+ SharedPointer &operator=(const SharedPointer &other){
   //fprintf(stderr, "operator=()\n");
   Dereference();
   _pObject = other._pObject;
@@ -27,50 +29,50 @@ public:
   return *this;
  }
 
- bool SameObject(const ObjectUser &other)const{
+ bool SameObject(const SharedPointer &other)const{
   return _pObject == other._pObject;
  }
 
- bool NotSameObject(const ObjectUser &other)const{
+ bool NotSameObject(const SharedPointer &other)const{
   return _pObject != other._pObject;
  }
 
- T *operator->(){
-  return _pObject;
- }
-
- bool operator==(const ObjectUser &other)const{
-  return Object() == other.Object();
- }
-
- bool operator!=(const ObjectUser &other)const{
-  return Object() != other.Object();
- }
-
-//for container
- bool operator<(const ObjectUser &other)const{
-  return Object() < other.Object();
- }
-
- bool operator>(const ObjectUser &other)const{
-  return Object() > other.Object();
- }
-
- bool operator<=(const ObjectUser &other)const{
-  return Object() <= other.Object();
- }
-
- bool operator>=(const ObjectUser &other)const{
-  return Object() >= other.Object();
- }
-
- T &Object()const{
+ T &operator*()const{
   return *(T*)_pObject;
  }
 
+ T *operator->()const{
+  return _pObject;
+ }
+
+ bool operator==(const SharedPointer &other)const{
+  return *this == *other;
+ }
+
+ bool operator!=(const SharedPointer &other)const{
+  return *this != *other;
+ }
+
+//for container
+ bool operator<(const SharedPointer &other)const{
+  return *this < *other;
+ }
+
+ bool operator>(const SharedPointer &other)const{
+  return *this > *other;
+ }
+
+ bool operator<=(const SharedPointer &other)const{
+  return *this <= *other;
+ }
+
+ bool operator>=(const SharedPointer &other)const{
+  return *this >= *other;
+ }
+
 private:
- ObjectUser(SharedObject<T> *pObject): _pObject(pObject){
-//  fprintf(stderr, "ObjectUser(SharedObject<T> *pObject)\n");
+ SharedPointer(SharedObject<T> *pObject): _pObject(pObject){
+//  fprintf(stderr, "SharedPointer(SharedObject<T> *pObject)\n");
  }
 
  void Reference(){
@@ -89,8 +91,8 @@ private:
 template<typename T>
 class SharedObject: public T{
 public:
- static ObjectUser<T> New(const T &object){
-  return ObjectUser<T>(new SharedObject(object));
+ static SharedPointer<T> New(const T &object){
+  return SharedPointer<T>(new SharedObject(object));
  }
 
  void Reference(){
@@ -110,3 +112,5 @@ private:
 
  size_t _nCount = 1;
 };
+
+}//namespace elf
