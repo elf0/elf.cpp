@@ -10,7 +10,8 @@ namespace elf{
 template<class T>
 class Point{
 public:
-    Point(){}
+    Point()
+        : _x(), _y(){}
 
     Point(const Point &point)
         : Point(point.GetX(), point.GetY()){}

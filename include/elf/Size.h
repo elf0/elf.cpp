@@ -10,7 +10,8 @@ namespace elf{
 template<class T>
 class Size{
 public:
-    Size(){}
+    Size()
+        : _width(), _height(){}
 
     Size(const Size &size)
         : _width(size.GetWidth()), _height(size.GetHeight()){}

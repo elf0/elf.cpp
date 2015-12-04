@@ -122,22 +122,24 @@ public:
         Center(szTarget.GetWidth(), szTarget.GetHeight());
     }
 
+    template<class F>
     void Center(const T &tTargetWidth, const T &tTargetHeight){
-        float fScale = (float)GetHeight() / (float)GetWidth();
+        F fScale = (F)GetHeight() / (F)GetWidth();
         T tHeight = tTargetWidth * fScale;
         if(tHeight > tTargetHeight){
-            T tWidth = (float)tTargetHeight / fScale;
+            T tWidth = (F)tTargetHeight / fScale;
             Set(tWidth, tTargetHeight, (tTargetWidth - tWidth) >> 1, 0);
         }
         else
             Set(tTargetWidth, tHeight, 0, (tTargetHeight - tHeight) >> 1);
     }
 
+    template<class F>
     void Center(const Rect<T> &rtTarget){
-        float fScale = (float)GetHeight() / (float)GetWidth();
+        F fScale = (F)GetHeight() / (F)GetWidth();
         T tHeight = rtTarget.GetWidth() * fScale;
         if(tHeight > rtTarget.GetHeight()){
-            T tWidth = (float)rtTarget.GetHeight() / fScale;
+            T tWidth = (F)rtTarget.GetHeight() / fScale;
             SetSize(tWidth, rtTarget.GetHeight());
             SetLeftTop(rtTarget.GetLeft() + ((rtTarget.GetWidth() - tWidth) >> 1), rtTarget.GetTop());
         }
