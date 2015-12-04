@@ -97,8 +97,10 @@ public:
     }
 
     void SetRight(const T &right){
-        if(right < _ptLeftTop.GetX())
+        if(right < _ptLeftTop.GetX()){
             _size.SetWidth(_ptLeftTop.GetX() - right);
+            _ptLeftTop.SetX(right);
+        }
         else
             _size.SetWidth(right - _ptLeftTop.GetX());
     }
@@ -108,8 +110,10 @@ public:
     }
 
     void SetBottom(const T &bottom){
-        if(bottom < _ptLeftTop.GetY())
+        if(bottom < _ptLeftTop.GetY()){
             _size.SetHeight(_ptLeftTop.GetY() - bottom);
+            _ptLeftTop.SetY(bottom);
+        }
         else
             _size.SetHeight(bottom - _ptLeftTop.GetY());
     }
