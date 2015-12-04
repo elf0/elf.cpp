@@ -113,6 +113,35 @@ public:
         else
             _size.SetHeight(bottom - _ptLeftTop.GetY());
     }
+
+    void Center(const Size<T> &szTarget){
+        Center(szTarget.GetWidth(), szTarget.GetHeight());
+    }
+
+    void Center(const T &tTargetWidth, const T &tTargetHeight){
+        float fScale = (float)GetHeight() / (float)GetWidth();
+        T tHeight = tTargetWidth * fScale;
+        if(tHeight > tTargetHeight){
+            T tWidth = (float)tTargetHeight / fScale;
+            Set(tWidth, tTargetHeight, (tTargetWidth - tWidth) >> 1, 0);
+        }
+        else
+            Set(tTargetWidth, tHeight, 0, (tTargetHeight - tHeight) >> 1);
+    }
+
+    void Center(const Rect<T> &rtTarget){
+        float fScale = (float)GetHeight() / (float)GetWidth();
+        T tHeight = rtTarget.GetWidth() * fScale;
+        if(tHeight > rtTarget.GetHeight()){
+            T tWidth = (float)rtTarget.GetHeight() / fScale;
+            SetSize(tWidth, rtTarget.GetHeight());
+            SetLeftTop(rtTarget.GetLeft() + ((rtTarget.GetWidth() - tWidth) >> 1), rtTarget.GetTop());
+        }
+        else{
+            SetSize(rtTarget.width(), tHeight);
+            SetLeftTop(rtTarget.GetLeft(), rtTarget.GetTop() + ((rtTarget.height() - tHeight) >> 1));
+        }
+    }
 private:
     Size<T> _size;
     Point<T> _ptLeftTop;
