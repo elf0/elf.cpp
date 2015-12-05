@@ -223,8 +223,26 @@ public:
   }
 
   //Note: Performance
+  bool Contains(const Rect<T> &other)const{
+    return Contains(other, x1(), y1());
+  }
+
+  bool Contains(const Point<T> &ptOtherX0Y0, const Point<T> &ptOtherX1Y1, const Point<T> &ptThisX1Y1)const{
+    return Contains(ptOtherX0Y0.x(), ptOtherX0Y0.y(), ptOtherX1Y1.x(), ptOtherX1Y1.y(), ptThisX1Y1.x(), ptThisX1Y1.y());
+  }
+
+  bool Contains(const T &tOtherX0, const T &tOtherY0, const T &tOtherX1, const T &tOtherY1, const T &ptThisX1, const T &ptThisY1)const{
+    return x0() <= tOtherX0 && ptThisX1 >= tOtherX1
+        && y0() <= tOtherY0 && ptThisY1 >= tOtherY1;
+  }
+
+  //Note: Performance
   bool IntersectsWith(const Rect &other)const{
     return IntersectsWith(other.x0(), other.y0(), other.x1(), other.y1, x1(), y1());
+  }
+
+  bool IntersectsWith(const Point<T> &ptOtherX0Y0, const Point<T> &ptOtherX1Y1, const Point<T> &ptThisX1Y1)const{
+    return IntersectsWith(ptOtherX0Y0.x(), ptOtherX0Y0.y(), ptOtherX1Y1.x(), ptOtherX1Y1.y(), ptThisX1Y1.x(), ptThisX1Y1.y());
   }
 
   bool IntersectsWith(const T &tOtherX0, const T &tOtherY0, const T &tOtherX1, const T &tOtherY1, const T &tThisX1, const T &tThisY1)const{
