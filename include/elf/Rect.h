@@ -162,15 +162,15 @@ public:
 
   //Note: Performance
   bool Contains(const Point<T> &point){
-    T &tX = point.GetX();
-    T &tY = point.GetY();
+    const T &tX = point.GetX();
+    const T &tY = point.GetY();
     return tX >= GetLeft() && tX < GetRight()
         && tY >= GetTop() && tY < GetBottom();
   }
 
   bool Contains(const Point<T> &point, const Point<T> &ptRightBottom){
-    T &tX = point.GetX();
-    T &tY = point.GetY();
+    const T &tX = point.GetX();
+    const T &tY = point.GetY();
     return tX >= GetLeft() && tX < ptRightBottom.GetX()
         && tY >= GetTop() && tY < ptRightBottom.GetY();
   }
