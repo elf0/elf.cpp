@@ -14,18 +14,18 @@ public:
         : _width(), _height(){}
 
     Size(const Size &size)
-        : _width(size.Width()), _height(size.Height()){}
+        : _width(size.width()), _height(size.height()){}
 
     Size(const T &width, const T &height)
         : _width(width), _height(height){}
 
     void set(const Size &size){
-        set(size.Width(), size.Height());
+        set(size.width(), size.height());
     }
 
     void set(const T &width, const T &height){
-        setWidth(width);
-        setHeight(height);
+        set_width(width);
+        set_height(height);
     }
 
     const T &width()const{

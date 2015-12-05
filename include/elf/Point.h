@@ -14,7 +14,7 @@ public:
         : _x(), _y(){}
 
     Point(const Point &point)
-        : Point(point.X(), point.Y()){}
+        : Point(point.x(), point.y()){}
 
     Point(const T &x, const T &y)
         : _x(x), _y(y){}
@@ -33,7 +33,7 @@ public:
     }
 
     void set_x(const T &x){
-        _x= x;
+        _x = x;
     }
 
     const T &y()const{
