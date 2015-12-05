@@ -161,18 +161,40 @@ public:
   }
 
   //Note: Performance
-  bool Contains(const Point<T> &point){
-    const T &tX = point.GetX();
-    const T &tY = point.GetY();
-    return tX >= GetLeft() && tX < GetRight()
-        && tY >= GetTop() && tY < GetBottom();
+  bool Contains(const Point<T> &point)const{
+    return Contains(point.GetX(), point.GetY());
   }
 
-  bool Contains(const Point<T> &point, const Point<T> &ptRightBottom){
-    const T &tX = point.GetX();
-    const T &tY = point.GetY();
-    return tX >= GetLeft() && tX < ptRightBottom.GetX()
-        && tY >= GetTop() && tY < ptRightBottom.GetY();
+  //Note: Performance
+  bool Contains(const T &tX, const T &tY)const{
+    return ContainsX(tX, GetRight()) && ContainsY(tY, GetBottom());
+  }
+
+  bool Contains(const Point<T> &point, const Point<T> &ptRightBottom)const{
+    return Contains(point.GetX(), point.GetY(),
+                    ptRightBottom.GetX(), ptRightBottom.GetY());
+  }
+
+  bool Contains(const T &tX, const T &tY, const T &tRight, const T &tBottom)const{
+    return ContainsX(tX, tRight) && ContainsY(tY, tBottom);
+  }
+
+  //Note: Performance
+  bool ContainsX(const T &tX)const{
+    return ContainsX(tX, GetRight());
+  }
+
+  bool ContainsX(const T &tX, const T &tRight)const{
+    return tX >= GetLeft() && tX < tRight;
+  }
+
+  //Note: Performance
+  bool ContainsY(const T &tY)const{
+    return ContainsY(tY, GetBottom());
+  }
+
+  bool ContainsY(const T &tY, const T &tBottom)const{
+    return tY >= GetTop() && tY < tBottom;
   }
 private:
   Size<T> _size;
