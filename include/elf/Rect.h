@@ -77,6 +77,7 @@ public:
     return _size.width();
   }
 
+  //Note: Performance
   const T &half_width()const{
     return _size.width() / (T)2;
   }
@@ -89,6 +90,7 @@ public:
     return _size.height();
   }
 
+  //Note: Performance
   const T &half_height()const{
     return _size.height() / (T)2;
   }
