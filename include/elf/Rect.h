@@ -19,13 +19,13 @@ public:
     : Rect(rect._size, rect._ptX0Y0){}
 
   Rect(const Size<T> &size, const Point<T> &ptX0Y0)
-    : Rect(size.Width(), size.Height(), ptX0Y0.X(), ptX0Y0.Y()){}
+    : Rect(size.Width(), size.Height(), ptX0Y0.x(), ptX0Y0.y()){}
 
   Rect(const T &width, const T &height, const T &tX0, const T &tY0)
     : _size(width, height), _ptX0Y0(tX0, tY0){}
 
   void set(const Size<T> &size, const Point<T> &ptX0Y0){
-    set(size.Width(), size.Height(), ptX0Y0.X(), ptX0Y0.Y());
+    set(size.Width(), size.Height(), ptX0Y0.x(), ptX0Y0.y());
   }
 
   void set(const T &width, const T &height, const T &tX0, const T &tY0){
@@ -183,7 +183,7 @@ public:
 
   //Note: Performance
   bool Contains(const Point<T> &point)const{
-    return Contains(point.X(), point.Y());
+    return Contains(point.x(), point.y());
   }
 
   //Note: Performance
