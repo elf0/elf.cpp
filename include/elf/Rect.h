@@ -195,13 +195,13 @@ public:
     return ContainsX(tX, x1()) && ContainsY(tY, y1());
   }
 
-  bool Contains(const Point<T> &point, const Point<T> &ptX1Y1)const{
+  bool Contains(const Point<T> &point, const Point<T> &ptThisX1Y1)const{
     return Contains(point.x(), point.y(),
-                    ptX1Y1.x(), ptX1Y1.y());
+                    ptThisX1Y1.x(), ptThisX1Y1.y());
   }
 
-  bool Contains(const T &tX, const T &tY, const T &tX1, const T &tY1)const{
-    return ContainsX(tX, tX1) && ContainsY(tY, tY1);
+  bool Contains(const T &tX, const T &tY, const T &tThisX1, const T &tThisY1)const{
+    return ContainsX(tX, tThisX1) && ContainsY(tY, tThisY1);
   }
 
   //Note: Performance
@@ -209,8 +209,8 @@ public:
     return ContainsX(tX, x1());
   }
 
-  bool ContainsX(const T &tX, const T &tX1)const{
-    return tX >= x0() && tX < tX1;
+  bool ContainsX(const T &tX, const T &tThisX1)const{
+    return tX >= x0() && tX < tThisX1;
   }
 
   //Note: Performance
@@ -218,8 +218,8 @@ public:
     return ContainsY(tY, y1());
   }
 
-  bool ContainsY(const T &tY, const T &tY1)const{
-    return tY >= y0() && tY < tY1;
+  bool ContainsY(const T &tY, const T &tThisY1)const{
+    return tY >= y0() && tY < tThisY1;
   }
 
   //Note: Performance
@@ -227,8 +227,8 @@ public:
     return IntersectsWith(other.x0(), other.y0(), other.x1(), other.y1, x1(), y1());
   }
 
-  bool IntersectsWith(const T &tOtherX0, const T &tOtherY0, const T &tOtherX1, const T &tOtherY1, const T &tX1, const T &tY1)const{
-    return x0() < tOtherX1 && tOtherX0 < tX1 && y0() < tOtherY1 && tOtherY0 < tY1;
+  bool IntersectsWith(const T &tOtherX0, const T &tOtherY0, const T &tOtherX1, const T &tOtherY1, const T &tThisX1, const T &tThisY1)const{
+    return x0() < tOtherX1 && tOtherX0 < tThisX1 && y0() < tOtherY1 && tOtherY0 < tThisY1;
   }
 private:
   Size<T> _size;
