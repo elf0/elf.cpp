@@ -14,33 +14,33 @@ public:
         : _x(), _y(){}
 
     Point(const Point &point)
-        : Point(point.GetX(), point.GetY()){}
+        : Point(point.X(), point.Y()){}
 
     Point(const T &x, const T &y)
         : _x(x), _y(y){}
 
-    void Set(const Point &point){
-        Set(point.GetX(), point.GetY());
+    void set(const Point &point){
+        set(point.x(), point.y());
     }
 
-    void Set(const T &x, const T &y){
-        SetX(x);
-        SetY(y);
+    void set(const T &x, const T &y){
+        set_x(x);
+        set_y(y);
     }
 
-    const T&GetX()const{
+    const T &x()const{
         return _x;
     }
 
-    void SetX(const T &x){
+    void set_x(const T &x){
         _x= x;
     }
 
-    const T&GetY()const{
+    const T &y()const{
         return _y;
     }
 
-    void SetY(const T &y){
+    void set_y(const T &y){
         _y = y;
     }
 private:

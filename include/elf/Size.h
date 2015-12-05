@@ -14,33 +14,33 @@ public:
         : _width(), _height(){}
 
     Size(const Size &size)
-        : _width(size.GetWidth()), _height(size.GetHeight()){}
+        : _width(size.Width()), _height(size.Height()){}
 
     Size(const T &width, const T &height)
         : _width(width), _height(height){}
 
-    void Set(const Size &size){
-        Set(size.GetWidth(), size.GetHeight());
+    void set(const Size &size){
+        set(size.Width(), size.Height());
     }
 
-    void Set(const T &width, const T &height){
-        SetWidth(width);
-        SetHeight(height);
+    void set(const T &width, const T &height){
+        setWidth(width);
+        setHeight(height);
     }
 
-    const T&GetWidth()const{
+    const T &width()const{
         return _width;
     }
 
-    void SetWidth(const T &width){
+    void set_width(const T &width){
         _width = width;
     }
 
-    const T&GetHeight()const{
+    const T &height()const{
         return _height;
     }
 
-    void SetHeight(const T &height){
+    void set_height(const T &height){
         _height = height;
     }
 private:
