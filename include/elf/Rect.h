@@ -141,14 +141,17 @@ public:
       _size.set_height(tY1 - _ptX0Y0.y());
   }
 
+  //Note: Performance
   Point<T> center()const{
     return Point<T>(x(), y());
   }
 
+  //Note: Performance
   T x()const{
     return x0() + half_width();
   }
 
+  //Note: Performance
   T y()const{
     return y0() + half_height();
   }
