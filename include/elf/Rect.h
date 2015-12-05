@@ -173,11 +173,11 @@ public:
     if(tHeight > rtTarget.height()){
       T tWidth = (F)rtTarget.height() / fScale;
       set_size(tWidth, rtTarget.height());
-      set_x0_y0(rtTarget.X0() + ((rtTarget.width() - tWidth) / (T)2), rtTarget.Y0());
+      set_x0_y0(rtTarget.x0() + ((rtTarget.width() - tWidth) / (T)2), rtTarget.y0());
     }
     else{
       set_size(rtTarget.width(), tHeight);
-      set_x0_y0(rtTarget.X0(), rtTarget.Y0() + ((rtTarget.height() - tHeight) / (T)2));
+      set_x0_y0(rtTarget.x0(), rtTarget.y0() + ((rtTarget.height() - tHeight) / (T)2));
     }
   }
 
