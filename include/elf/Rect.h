@@ -142,14 +142,14 @@ public:
   }
 
   Point<T> center()const{
-    return Point<T>(center_x(), center_y());
+    return Point<T>(x(), y());
   }
 
-  T center_x()const{
+  T x()const{
     return x0() + half_width();
   }
 
-  T center_y()const{
+  T y()const{
     return y0() + half_height();
   }
 
