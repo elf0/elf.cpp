@@ -19,13 +19,13 @@ public:
     : Rect(rect._size, rect._ptX0Y0){}
 
   Rect(const Size<T> &size, const Point<T> &ptX0Y0)
-    : Rect(size.Width(), size.Height(), ptX0Y0.x(), ptX0Y0.y()){}
+    : Rect(size.width(), size.height(), ptX0Y0.x(), ptX0Y0.y()){}
 
   Rect(const T &width, const T &height, const T &tX0, const T &tY0)
     : _size(width, height), _ptX0Y0(tX0, tY0){}
 
   void set(const Size<T> &size, const Point<T> &ptX0Y0){
-    set(size.Width(), size.Height(), ptX0Y0.x(), ptX0Y0.y());
+    set(size.width(), size.height(), ptX0Y0.x(), ptX0Y0.y());
   }
 
   void set(const T &width, const T &height, const T &tX0, const T &tY0){
@@ -34,7 +34,7 @@ public:
   }
 
   void set_size(const Size<T> &size){
-    set_size(size.Width(), size.Height());
+    set_size(size.width(), size.height());
   }
 
   void set_size(const T &width, const T &height){
@@ -125,7 +125,7 @@ public:
 
   //Note: Performance
   T y1()const{
-    return _ptX0Y0.y() + _size.Height();
+    return _ptX0Y0.y() + _size.height();
   }
 
   void set_y1(const T &tY1){
