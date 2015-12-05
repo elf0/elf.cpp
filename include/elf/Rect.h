@@ -15,8 +15,8 @@ class Rect{
 public:
   Rect(){}
 
-  Rect(const Rect<T> &rect)
-    : Rect(rect._size, rect._ptX0Y0){}
+  Rect(const Rect<T> &other)
+    : Rect(other._size, other._ptX0Y0){}
 
   Rect(const Size<T> &size, const Point<T> &ptX0Y0)
     : Rect(size.width(), size.height(), ptX0Y0.x(), ptX0Y0.y()){}
@@ -28,18 +28,22 @@ public:
     set(size.width(), size.height(), ptX0Y0.x(), ptX0Y0.y());
   }
 
-  void set(const T &width, const T &height, const T &tX0, const T &tY0){
-    set_size(width, height);
+  void set(const T &tWidth, const T &tHeight, const T &tX0, const T &tY0){
+    set_size(tWidth, tHeight);
     set_x0_y0(tX0, tY0);
+  }
+
+  const Size<T> &size()const{
+    return _size;
   }
 
   void set_size(const Size<T> &size){
     set_size(size.width(), size.height());
   }
 
-  void set_size(const T &width, const T &height){
-    set_width(width);
-    set_height(height);
+  void set_size(const T &tWidth, const T &tHeight){
+    set_width(tWidth);
+    set_height(tHeight);
   }
 
   const Point<T> &x0_y0()const{
