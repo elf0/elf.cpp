@@ -1,7 +1,7 @@
 #pragma once
 //License: Public Domain
 //Author: elf
-//EMail: elf198012@gmail.com
+//EMail: elf@elf0.org
 
 namespace elf{
 
