@@ -49,11 +49,11 @@ public:
     _pPrev = _pNext = this;
   }
 
-  Bool Alone(){
+  bool Alone(){
     return _pNext == this;
   }
 
-  Bool NotAlone(){
+  bool NotAlone(){
     return _pNext != this;
   }
 
@@ -80,3 +80,4 @@ private:
 };
 
 #endif //DOUBLENODE_H
+

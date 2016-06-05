@@ -16,11 +16,11 @@ public:
     _entry.Reset();
   }
 
-  Bool Empty(){
+  bool Empty(){
     return _entry.Alone();
   }
 
-  Bool NotEmpty(){
+  bool NotEmpty(){
     return _entry.NotAlone();
   }
 
@@ -32,19 +32,19 @@ public:
     return _entry.Prev();
   }
 
-  Bool First(DoubleNode *pNode){
+  bool First(DoubleNode *pNode){
     return pNode->Prev() == &_entry;
   }
 
-  Bool NotFirst(DoubleNode *pNode){
+  bool NotFirst(DoubleNode *pNode){
     return pNode->Prev() != &_entry;
   }
 
-  Bool Last(DoubleNode *pNode){
+  bool Last(DoubleNode *pNode){
     return pNode->Next() == &_entry;
   }
 
-  Bool NotLast(DoubleNode *pNode){
+  bool NotLast(DoubleNode *pNode){
     return pNode->Next() != &_entry;
   }
 
@@ -100,3 +100,4 @@ private:
 };
 
 #endif //LIST_H
+
