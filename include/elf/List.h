@@ -78,6 +78,11 @@ public:
     return pNode;
   }
 
+  void MoveNodeToBack(DoubleNode *pNode){
+    Remove(pNode);
+    Push(pNode);
+  }
+
   void MoveNodeToFront(DoubleNode *pNode){
     Remove(pNode);
     PushFront(pNode);
@@ -100,4 +105,3 @@ private:
 };
 
 #endif //LIST_H
-
