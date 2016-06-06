@@ -21,7 +21,7 @@ typedef signed long long  I64;
 typedef float              F32;
 typedef double             F64;
 
-#ifdef __x86_64__
+#if defined(__x86_64__) || defined(_WIN64)
 typedef U64 U;
 typedef I64 I;
 typedef F64 F;
