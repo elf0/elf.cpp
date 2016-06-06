@@ -7,14 +7,11 @@
 
 class DoubleNode{
 public:
-  DoubleNode()
-    : _pPrev(this)
-    , _pNext(this)
-  {}
+  DoubleNode(){}
 
   DoubleNode(DoubleNode *pPrev, DoubleNode *pNext)
-    : _pPrev(pPrev)
-    , _pNext(pNext)
+    : _pNext(pNext)
+    , _pPrev(pPrev)
   {}
 
   DoubleNode *Next(){
@@ -75,9 +72,8 @@ public:
     *pTargetNode = tmp;
   }
 private:
-  DoubleNode *_pNext;
-  DoubleNode *_pPrev;
+  DoubleNode *_pNext = this;
+  DoubleNode *_pPrev = this;
 };
 
 #endif //DOUBLENODE_H
-
