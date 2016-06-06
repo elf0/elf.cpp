@@ -18,9 +18,6 @@
 
 #endif
 
-typedef unsigned char      Byte;
-typedef unsigned char      C;
-
 typedef unsigned char      U8;
 typedef unsigned short     U16;
 typedef unsigned int       U32;
@@ -44,8 +41,15 @@ typedef I32 I;
 typedef F32 F;
 #endif
 
+//Character
+typedef U8 C;
+typedef U16 C16;
+typedef U32 C32;
+
 //Boolean
 typedef U8 B;
+
+typedef U8 Byte;
 
 typedef Byte* P;
 
