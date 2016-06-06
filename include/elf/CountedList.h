@@ -10,7 +10,7 @@
 
 class CountedList: private List{
 public:
-  U32 Count(){
+  U Count(){
     return _uCount;
   }
 
@@ -108,12 +108,12 @@ public:
 
   void Swap(CountedList *pTarget){
     List::Swap(pTarget);
-    U32 nTmp = _uCount;
+    U nTmp = _uCount;
     _uCount = pTarget->_uCount;
     pTarget->_uCount = nTmp;
   }
 private:
-  U32 _uCount = 0;
+  U _uCount = 0;
 };
 
 #endif //COUNTEDLIST_H
