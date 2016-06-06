@@ -54,7 +54,7 @@ typedef Byte* P;
 typedef signed long Result;
 
 #define ContainerOf(pointer, Member, Container) \
-    ((Container*)((Byte*)(pointer) - (Byte*)&((Container*)NULL)->Member))
+    ((Container*)((Byte*)(pointer) - (Byte*)&((Container*)nullptr)->Member))
 
 #endif //TYPE_H
 
