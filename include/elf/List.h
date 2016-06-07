@@ -68,6 +68,10 @@ public:
     return pNode;
   }
 
+  void PopTo(List *pTarget){
+    pTarget->Push(Pop());
+  }
+
   void PushFront(DoubleNode *pNode){
     pNode->Link(&_entry, _entry.Next());
   }

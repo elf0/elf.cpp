@@ -74,6 +74,12 @@ public:
     return pNode;
   }
 
+  void PopTo(CountedList *pTarget){
+    List::PopTo(pTarget);
+    --_uCount;
+    ++pTarget->_uCount;
+  }
+
   void PushFront(DoubleNode *pNode){
     List::PushFront(pNode);
     ++_uCount;

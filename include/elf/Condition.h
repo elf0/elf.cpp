@@ -8,6 +8,7 @@
 #ifdef __linux__
 #include <pthread.h>
 #else
+#include <uv.h>
 #endif
 
 namespace thread{
@@ -18,6 +19,7 @@ public:
 #ifdef __linux__
     _condition = PTHREAD_COND_INITIALIZER;
 #else
+    UV_EXTERN int uv_cond_init(&_condition);
 #endif
   }
 
@@ -25,6 +27,7 @@ public:
 #ifdef __linux__
     pthread_cond_destroy(&_condition);
 #else
+    uv_cond_destroy(&_condition);
 #endif
   }
 
@@ -32,6 +35,7 @@ public:
 #ifdef __linux__
     pthread_cond_wait(&_condition, &pMutex->_mutex);
 #else
+    uv_cond_wait(&_condition, &pMutex->_mutex);
 #endif
   }
 
@@ -39,6 +43,7 @@ public:
 #ifdef __linux__
     pthread_cond_signal(&_condition);
 #else
+    uv_cond_signal(&_condition);
 #endif
   }
 
@@ -46,12 +51,14 @@ public:
 #ifdef __linux__
     pthread_cond_broadcast(&_condition);
 #else
+    uv_cond_broadcast(&_condition);
 #endif
   }
 private:
 #ifdef __linux__
-  pthread_condition_t _condition;
+  pthread_cond_t _condition;
 #else
+  uv_cond_t _condition;
 #endif
 };
 
