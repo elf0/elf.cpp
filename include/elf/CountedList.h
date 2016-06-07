@@ -14,8 +14,8 @@ public:
     return _uCount;
   }
 
-  void Reset(){
-    List::Reset();
+  void Clear(){
+    List::Clear();
     _uCount = 0;
   }
 

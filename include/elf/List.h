@@ -12,7 +12,7 @@ public:
   List(){
   }
 
-  void Reset(){
+  void Clear(){
     _entry.Reset();
   }
 
