@@ -21,6 +21,7 @@ public:
   typedef E8 (RBTree::*Add_f) (const Byte *pKey, U32 uKey, void *pContext, Node **ppNode);
 
   inline RBTree();
+  inline ~RBTree();
   inline Node *Find(const Byte *pKey, U32 uKey);
   inline B Add(const Byte *pKey, U32 uKey, void *pContext, Node **ppNode);
   inline void Remove(Node *pNode);
@@ -30,6 +31,7 @@ private:
   inline E8 AddChild(const Byte *pKey, U32 uKey
                      , void *pContext, Node **ppNode);
   inline void Balance(Node *pNode);
+  static inline void DeleteNode(RBTree<TNode>::Node *pNode);
 
   Node     *_pRoot = 0;
   Add_f   _fAdd = &RBTree::AddRoot;
@@ -37,6 +39,23 @@ private:
 
 template<typename TNode>
 RBTree<TNode>::RBTree(){
+}
+
+template<typename TNode>
+void RBTree<TNode>::DeleteNode(RBTree<TNode>::Node *pNode){
+  if(pNode->pLeft)
+    DeleteNode(pNode->pLeft);
+
+  if(pNode->pRight)
+    DeleteNode(pNode->pRight);
+
+  TNode::Delete((TNode*)pNode);
+}
+
+template<typename TNode>
+RBTree<TNode>::~RBTree(){
+  if(_pRoot)
+    DeleteNode(_pRoot);
 }
 
 template<typename TNode>

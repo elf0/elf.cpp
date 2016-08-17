@@ -20,10 +20,15 @@ public:
   typedef typename RBTree<TNode>::Node Node;
 
   inline HashSet();
+  inline ~HashSet();
   inline  Node *Find(const Byte *pKey, U32 uKey);
   inline  E8 Add(const Byte *pKey, U32 uKey
-                               , void *pContext, Node **ppNode);
+                 , void *pContext, Node **ppNode);
   inline void Remove(U32 uKey, Node *pNode);
+  U32 Count(){
+    return _uCount;
+  }
+
 private:
   RBTree<TNode> _trees[SET_HASH_WIDTH];
   U32 _uCount = 0;
@@ -34,15 +39,19 @@ HashSet<TNode>::HashSet(){
 }
 
 template<typename TNode>
+HashSet<TNode>::~HashSet(){
+}
+
+template<typename TNode>
 typename HashSet<TNode>::Node *HashSet<TNode>::Find(const Byte *pKey, U32 uKey){
   return (Node *)_trees[SET_HASH_INDEX(uKey)].Find(pKey, uKey);
 }
 
 template<typename TNode>
 E8 HashSet<TNode>::Add(const Byte *pKey, U32 uKey
-                             , void *pContext, Node **ppNode){
+                       , void *pContext, Node **ppNode){
   E8 e = _trees[SET_HASH_INDEX(uKey)].Add(pKey, uKey
-                     , pContext, (typename RBTree<TNode>::Node**)ppNode);
+                                          , pContext, (typename RBTree<TNode>::Node**)ppNode);
   if(e)
     return e;
 
