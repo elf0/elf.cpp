@@ -58,13 +58,13 @@ typename RBTree<TNode>::Node *RBTree<TNode>::Find(const Byte *pKey, U32 uKey){
 
 template<typename TNode>
 E8 RBTree<TNode>::Add(const Byte *pKey, U32 uKey
-               , void *pContext, Node **ppNode){
+                      , void *pContext, Node **ppNode){
   return (this->*_fAdd)(pKey, uKey, pContext, ppNode);
 }
 
 template<typename TNode>
 E8 RBTree<TNode>::AddRoot(const Byte *pKey, U32 uKey
-                   , void *pContext, Node **ppNode){
+                          , void *pContext, Node **ppNode){
   Node *pNew = (Node*)TNode::New(pContext, pKey, uKey);
   pNew->pLeft = 0;
   pNew->pRight = 0;
@@ -80,7 +80,7 @@ E8 RBTree<TNode>::AddRoot(const Byte *pKey, U32 uKey
 
 template<typename TNode>
 E8 RBTree<TNode>::AddChild(const Byte *pKey, U32 uKey
-                    , void *pContext, Node **ppNode){
+                           , void *pContext, Node **ppNode){
   Node *pNew;
   Node *pNode = _pRoot;
   I8 iCompare;
@@ -102,8 +102,10 @@ E8 RBTree<TNode>::AddChild(const Byte *pKey, U32 uKey
         break;
       }
     }
-    else
+    else{
+      *ppNode = pNode;
       return 1;
+    }
   }
 
   RBTREE_NODE_SET_PARENT(pNew, pNode);
