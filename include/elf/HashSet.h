@@ -18,10 +18,12 @@ template<typename TNode>
 class HashSet{
 public:
   typedef typename RBTree<TNode>::Node Node;
+  typedef E8 (*ForEach_f) (void *pContext, Node *pNode);
 
   inline HashSet();
   inline ~HashSet();
   inline  Node *Find(const Byte *pKey, U32 uKey);
+  inline E8 ForEach(ForEach_f onEach, void *pContext);
   inline  E8 Add(const Byte *pKey, U32 uKey
                  , void *pContext, Node **ppNode);
   inline void Remove(U32 uKey, Node *pNode);
@@ -45,6 +47,20 @@ HashSet<TNode>::~HashSet(){
 template<typename TNode>
 typename HashSet<TNode>::Node *HashSet<TNode>::Find(const Byte *pKey, U32 uKey){
   return (Node *)_trees[SET_HASH_INDEX(uKey)].Find(pKey, uKey);
+}
+
+template<typename TNode>
+E8 HashSet<TNode>::ForEach(ForEach_f onEach, void *pContext){
+  E8 e;
+  RBTree<TNode> *pTree = _trees;
+  RBTree<TNode> *ptEnd = pTree + SET_HASH_WIDTH;
+  while(pTree != ptEnd){
+    e = pTree++->ForEach(onEach, pContext);
+    if(e)
+      return e;
+  }
+
+  return 0;
 }
 
 template<typename TNode>

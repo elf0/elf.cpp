@@ -18,20 +18,26 @@ public:
     B bRed;
   };
 
+  typedef E8 (*ForEach_f) (void *pContext, Node *pNode);
   typedef E8 (RBTree::*Add_f) (const Byte *pKey, U32 uKey, void *pContext, Node **ppNode);
 
   inline RBTree();
   inline ~RBTree();
   inline Node *Find(const Byte *pKey, U32 uKey);
+  inline E8 ForEach(ForEach_f onEach, void *pContext);
   inline B Add(const Byte *pKey, U32 uKey, void *pContext, Node **ppNode);
   inline void Remove(Node *pNode);
+
 private:
+  inline E8 ForEach(Node *pNode, ForEach_f onEach, void *pContext);
+
+
   inline E8 AddRoot(const Byte *pKey, U32 uKey
                     , void *pContext, Node **ppNode);
   inline E8 AddChild(const Byte *pKey, U32 uKey
                      , void *pContext, Node **ppNode);
   inline void Balance(Node *pNode);
-  static inline void DeleteNode(RBTree<TNode>::Node *pNode);
+  static inline void DeleteNode(Node *pNode);
 
   Node     *_pRoot = 0;
   Add_f   _fAdd = &RBTree::AddRoot;
@@ -70,6 +76,37 @@ typename RBTree<TNode>::Node *RBTree<TNode>::Find(const Byte *pKey, U32 uKey){
       pNode = pNode->pRight;
     else
       return pNode;
+  }
+
+  return 0;
+}
+
+template<typename TNode>
+E8 RBTree<TNode>::ForEach(ForEach_f onEach, void *pContext){
+  if(_pRoot)
+    return ForEach(_pRoot, onEach, pContext);
+
+  return 0;
+}
+
+template<typename TNode>
+E8 RBTree<TNode>::ForEach(Node *pNode, ForEach_f onEach, void *pContext){
+  E8 e;
+
+  if(pNode->pLeft){
+    e = ForEach(pNode->pLeft, onEach, pContext);
+    if(e)
+      return e;
+  }
+
+  e = onEach(pContext, pNode);
+  if(e)
+    return e;
+
+  if(pNode->pRight){
+    e = ForEach(pNode->pRight, onEach, pContext);
+    if(e)
+      return e;
   }
 
   return 0;
