@@ -86,6 +86,16 @@ public:
     return uData - uSpace;
   }
 
+  bool tryWrite(const_iterator pData, Size uData) {
+    Size uSpace = endSpace();
+    if (uData <= uSpace) {
+        std::memcpy(_pDataEnd, pData, uData);
+        _pDataEnd += uData;
+        return true;
+      }
+    return false;
+  }
+
          // return unwrote size, include c
   Size writeDC(const_iterator &pData, Size uData, C c) {
     Size uSpace = endSpace();
