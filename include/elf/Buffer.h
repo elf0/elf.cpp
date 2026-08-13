@@ -8,8 +8,8 @@ public:
         // Buffer() {}
         // ~Buffer() {}
 
-  void set(Size uSize, C *pBegin, C *pEnd) {
-    WBuffer::set(uSize, pBegin, pEnd);
+  void set(C *pBegin, C *pEnd) {
+    WBuffer::set(pBegin, pEnd);
     _pData = pBegin;
   }
 
@@ -30,16 +30,24 @@ public:
     return _pData - _pBegin;
   }
 
-  void move() {
+  iterator move() {
     Size uData = data();
     if (uData && _pData > _pBegin) {
         std::memmove(_pBegin, _pData, uData);
         _pData = _pBegin;
-        _pDataEnd = _pData + uData;
+        return _pDataEnd = _pData + uData;
       }
+    return nullptr;
   }
 
-         // return read size
+  iterator move(const_iterator pData, const_iterator pDataEnd) {
+    Size uData = pDataEnd - pData;
+    assert(uData <= size() && "Invalid arguments");
+    std::memmove(_pBegin, pData, uData);
+    _pData = _pBegin;
+    return _pDataEnd = _pData + uData;
+  }
+    // return read size
   Size read(iterator pBuffer, Size uBuffer) {
     Size uData = data();
     if (uData > uBuffer)

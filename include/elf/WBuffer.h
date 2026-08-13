@@ -10,11 +10,10 @@ public:
          // WBuffer() {}
          // ~WBuffer() {}
 
-  void set(Size uSize, C *pBegin, C *pEnd) {
-    _uSize = uSize;
+  void set(C *pBegin, C *pEnd) {
     _pBegin = _pDataEnd = pBegin;
     _pEnd = pEnd;
-    assert((pBegin + uSize == pEnd) && "Invalid arguments");
+    assert(pBegin && pBegin < pEnd && "Invalid arguments");
   }
 
   void reset() {
@@ -22,7 +21,7 @@ public:
   }
 
   Size size() const {
-    return _uSize;
+    return _pEnd - _pBegin;
   }
 
   Size data() const {
@@ -56,12 +55,10 @@ public:
          // stack-style allocate space for external use.
   iterator push(Size uSize) {
     iterator pDataEnd = _pDataEnd + uSize;
-    if (pDataEnd <= _pEnd) {
-        iterator pNew = _pDataEnd;
-        _pDataEnd = pDataEnd;
-        return pNew;
-      }
-    return nullptr;
+    assert(pDataEnd <= _pEnd && "Invalid uSize");
+    iterator pBegin = _pDataEnd;
+    _pDataEnd = pDataEnd;
+    return pBegin;
   }
 
          // stack-style free space
@@ -102,17 +99,17 @@ public:
     if (uData < uSpace) {
         // if (uData) {
         std::memcpy(_pDataEnd, pData, uData);
+        pData += uData;
         _pDataEnd += uData;
         // }
         *_pDataEnd++ = c;
-        pData += uData;
         return 0;
       }
     // if (uSpace) {
     std::memcpy(_pDataEnd, pData, uSpace);
-    _pDataEnd = _pEnd;
     pData += uSpace;
     uData -= uSpace;
+    _pDataEnd = _pEnd;
     // }
     return uData + 1;
   }
